@@ -138,6 +138,20 @@ def quality_report(data, mandatory_validations, optional_validations):
 def calculate_avg_risk_score_by_region(data):
     """
     Calcula a média do 'risk_score' por 'location_region' em ordem decrescente.
+    
+    SELECT 
+        receiving_address,
+        MAX(TRY_CAST(amount AS DOUBLE)) AS max_amount,
+        MAX(TRY_CAST(timestamp AS INTEGER)) AS latest_timestamp
+    FROM 
+        my_table 
+    WHERE 
+        transaction_type = 'sale'
+    GROUP BY 
+        receiving_address
+    ORDER BY 
+        max_amount DESC
+    LIMIT 3;
     """
     data['risk_score'] = pd.to_numeric(data['risk_score'], errors='coerce')
     return (
@@ -148,10 +162,25 @@ def calculate_avg_risk_score_by_region(data):
 
 def find_top_receiving_addresses(data):
     """
-    Lista os 3 principais 'receiving_address' com maior 'amount'.
+    Considerando somente a transação mais recente ("timestamp") com 
+    "transaction_type" igual a "sale" de cada "receiving address", 
+    liste os 3 "receiving address" com maior "amount" dentre estas transações 
+    (apresente o "receiving address", o "amount" e o "timestamp"). 
+
+    SELECT 
+        location_region,
+        AVG(TRY_CAST(risk_score AS DOUBLE)) AS avg_risk_score
+    FROM 
+        my_table 
+    WHERE location_region not in ('0', 'location_region')
+    GROUP BY 
+        location_region
+    ORDER BY 
+        avg_risk_score DESC;
+
     """
     data["amount"] = pd.to_numeric(data["amount"], errors="coerce")
-    data["timestamp"] = pd.to_datetime(data["timestamp"], errors="coerce")
+    data["timestamp"] = pd.to_numeric(data["timestamp"], errors="coerce")
 
     filtered_data = data[data["transaction_type"] == "sale"].dropna(subset=["amount", "timestamp"])
     grouped = filtered_data.groupby("receiving_address", as_index=False).agg(
