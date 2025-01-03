@@ -1,0 +1,20 @@
+#Ignorando ambiente virtual
+venv/
+
+# Ignorar arquivos nas pastas de input e output
+data/input/*
+data/output/*
+
+# Permitir que as pastas sejam rastreadas no repositório
+!data/input/.gitkeep
+!data/output/.gitkeep
+
+# Ignorar logs e arquivos temporários
+logs/*
+*.log
+*.csv
+*.tmp
+
+# Ignorar arquivos específicos do sistema
+.DS_Store
+Thumbs.db
