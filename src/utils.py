@@ -140,18 +140,15 @@ def calculate_avg_risk_score_by_region(data):
     Calcula a média do 'risk_score' por 'location_region' em ordem decrescente.
     
     SELECT 
-        receiving_address,
-        MAX(TRY_CAST(amount AS DOUBLE)) AS max_amount,
-        MAX(TRY_CAST(timestamp AS INTEGER)) AS latest_timestamp
+        location_region,
+        AVG(TRY_CAST(risk_score AS DOUBLE)) AS avg_risk_score
     FROM 
         my_table 
-    WHERE 
-        transaction_type = 'sale'
+    WHERE location_region not in ('0', 'location_region')
     GROUP BY 
-        receiving_address
+        location_region
     ORDER BY 
-        max_amount DESC
-    LIMIT 3;
+        avg_risk_score DESC;
     """
     data['risk_score'] = pd.to_numeric(data['risk_score'], errors='coerce')
     return (
@@ -168,16 +165,18 @@ def find_top_receiving_addresses(data):
     (apresente o "receiving address", o "amount" e o "timestamp"). 
 
     SELECT 
-        location_region,
-        AVG(TRY_CAST(risk_score AS DOUBLE)) AS avg_risk_score
+        receiving_address,
+        MAX(TRY_CAST(amount AS DOUBLE)) AS max_amount,
+        MAX(TRY_CAST(timestamp AS INTEGER)) AS latest_timestamp
     FROM 
         my_table 
-    WHERE location_region not in ('0', 'location_region')
+    WHERE 
+        transaction_type = 'sale'
     GROUP BY 
-        location_region
+        receiving_address
     ORDER BY 
-        avg_risk_score DESC;
-
+        max_amount DESC
+    LIMIT 3;
     """
     data["amount"] = pd.to_numeric(data["amount"], errors="coerce")
     data["timestamp"] = pd.to_numeric(data["timestamp"], errors="coerce")
