@@ -1,6 +1,6 @@
 # Data Pipeline with Pandas
 
-![Python](https://img.shields.io/badge/Python-3.9-blue) ![Pandas](https://img.shields.io/badge/Pandas-1.3.5-brightgreen)
+![Python](https://img.shields.io/badge/Python-3.9-blue) ![Pandas](https://img.shields.io/badge/Pandas-2.0.3-brightgreen)
 
 ## 📄 Description
 
