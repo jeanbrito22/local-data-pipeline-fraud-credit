@@ -1,25 +1,25 @@
-# Pipeline de Dados com Pandas
+# Data Pipeline with Pandas
 
 ![Python](https://img.shields.io/badge/Python-3.9-blue) ![Pandas](https://img.shields.io/badge/Pandas-1.3.5-brightgreen)
 
-## 📄 Descrição
+## 📄 Description
 
-Este projeto implementa um pipeline de dados que:
-- Importa um arquivo CSV.
-- Limpa os dados.
-- Gera duas tabelas de resultado.
-- Cria um relatório de qualidade dos dados.
+This project implements a data pipeline that:
+- Imports a CSV file.
+- Cleans the data.
+- Generates two result tables.
+- Creates a data quality report.
 
-## 🎯 Objetivo
+## 🎯 Objective
 
-1. **Importação:** Carregar um arquivo CSV para processamento.
-2. **Limpeza:** Tratar valores faltantes e inconsistências.
-3. **Resultados:**
-   - **Tabela 1:** `location_region` ordenadas pela média de `risk score`.
-   - **Tabela 2:** Top 3 `receiving address` com maior `amount` em transações recentes do tipo `sale`.
+1. **Import:** Load a CSV file for processing.
+2. **Cleaning:** Handle missing values and inconsistencies.
+3. **Results:**
+   - **Table 1:** `location_region` ordered by average `risk score`.
+   - **Table 2:** Top 3 `receiving address` with the highest `amount` in recent `sale` transactions.
 
-## 🛠 Tecnologias
+## 🛠 Technologies
 
-- **Linguagem:** Python 3.9
-- **Bibliotecas:** Pandas
-- **Ambiente:** Jupyter Notebook
+- **Language:** Python 3.9
+- **Libraries:** Pandas
+- **Environment:** Jupyter Notebook
